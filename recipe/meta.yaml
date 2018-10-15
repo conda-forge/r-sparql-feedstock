@@ -14,9 +14,10 @@ source:
     - https://cran.r-project.org/src/contrib/Archive/SPARQL/SPARQL_{{ version }}.tar.gz
   sha256: 2cb366b2b93804c12f17254a1c37687887fc12047b58b13aab0d7a6f000e533d
 
+# r-rcurl isn't available on Windows yet
 build:
   number: 1
-  skip: true  # [win32]
+  skip: true
 
   rpaths:
     - lib/R/lib/
