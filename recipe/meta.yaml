@@ -16,9 +16,9 @@ source:
 
 # r-rcurl isn't available on Windows yet
 build:
+  noarch: generic
   merge_build_host: True  # [win]
-  number: 1
-  skip: true  # [win]
+  number: 1001
   rpaths:
     - lib/R/lib/
     - lib/
