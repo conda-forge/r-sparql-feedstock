@@ -1,4 +1,4 @@
-{% set version = '1.16' %}
+{% set version = "1.16" %}
 
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
@@ -17,8 +17,8 @@ source:
 # r-rcurl isn't available on Windows yet
 build:
   noarch: generic
-  merge_build_host: True  # [win]
-  number: 1002
+  merge_build_host: true  # [win]
+  number: 1003
   rpaths:
     - lib/R/lib/
     - lib/
@@ -41,11 +41,13 @@ test:
 
 about:
   home: https://CRAN.R-project.org/package=SPARQL
-  license: GPL-3
+  license: GPL-3.0-only
   summary: 'Use SPARQL to pose SELECT or UPDATE queries to an end-point. '
 
   license_family: GPL3
 
+  license_file:
+    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
 extra:
   recipe-maintainers:
     - conda-forge/r
