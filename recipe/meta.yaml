@@ -1,5 +1,4 @@
-{% set version = "1.16" %}
-
+{% set version = '1.16' %}
 {% set posix = 'm2-' if win else '' %}
 {% set native = 'm2w64-' if win else '' %}
 
@@ -8,27 +7,27 @@ package:
   version: {{ version|replace("-", "_") }}
 
 source:
-  fn: SPARQL_{{ version }}.tar.gz
   url:
     - {{ cran_mirror }}/src/contrib/SPARQL_{{ version }}.tar.gz
     - {{ cran_mirror }}/src/contrib/Archive/SPARQL/SPARQL_{{ version }}.tar.gz
   sha256: 2cb366b2b93804c12f17254a1c37687887fc12047b58b13aab0d7a6f000e533d
 
-# r-rcurl isn't available on Windows yet
 build:
+  merge_build_host: True  # [win]
+  number: 1004
   noarch: generic
-  merge_build_host: true  # [win]
-  number: 1003
   rpaths:
     - lib/R/lib/
     - lib/
 
 requirements:
+  build:
+    - {{ posix }}zip               # [win]
+    - cross-r-base {{ r_base }}    # [build_platform != target_platform]
   host:
     - r-base
     - r-rcurl
     - r-xml
-
   run:
     - r-base
     - r-rcurl
@@ -36,23 +35,33 @@ requirements:
 
 test:
   commands:
-    - $R -e "library('SPARQL')"  # [not win]
+    - $R -e "library('SPARQL')"           # [not win]
     - "\"%R%\" -e \"library('SPARQL')\""  # [win]
 
 about:
   home: https://CRAN.R-project.org/package=SPARQL
   license: GPL-3.0-only
-  summary: 'Use SPARQL to pose SELECT or UPDATE queries to an end-point. '
-
+  summary: Use SPARQL to pose SELECT or UPDATE queries to an end-point.
   license_family: GPL3
-
   license_file:
-    - {{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3
+    - '{{ environ["PREFIX"] }}/lib/R/share/licenses/GPL-3'
+
 extra:
   recipe-maintainers:
     - conda-forge/r
-    - dpryan79
-    - johanneskoester
-    - bgruening
-    - daler
-    - jdblischak
+
+# Package: SPARQL
+# Type: Package
+# Title: SPARQL client
+# Version: 1.16
+# Date: 2013-10-23
+# Author: Willem Robert van Hage <willem.van.hage@synerscope.com>, with contributions from: Tomi Kauppinen, Benedikt Graeler, Christopher Davis, Jesper Hoeksema, Alan Ruttenberg, and Daniel Bahls.
+# Maintainer: Willem Robert van Hage <willem.van.hage@synerscope.com>
+# Description: Use SPARQL to pose SELECT or UPDATE queries to an end-point.
+# License: GPL-3
+# Depends: XML, RCurl
+# LazyLoad: yes
+# Packaged: 2013-10-24 01:05:19 UTC; wrvhage
+# NeedsCompilation: no
+# Repository: CRAN
+# Date/Publication: 2013-10-25 17:39:14
