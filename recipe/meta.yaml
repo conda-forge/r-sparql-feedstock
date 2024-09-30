@@ -1,6 +1,5 @@
 {% set version = '1.16' %}
 {% set posix = 'm2-' if win else '' %}
-{% set native = 'm2w64-' if win else '' %}
 
 package:
   name: r-sparql
@@ -13,8 +12,7 @@ source:
   sha256: 2cb366b2b93804c12f17254a1c37687887fc12047b58b13aab0d7a6f000e533d
 
 build:
-  merge_build_host: True  # [win]
-  number: 1006
+  number: 1007
   noarch: generic
   rpaths:
     - lib/R/lib/
